@@ -2,7 +2,7 @@
 
 1. CLI for 25 best hikes in the world, starting with https://localadventurer.com/25-best-hikes-in-the-world-bucket-list/
 
-2. User types 25_best_hikes
+2. User types outdoorsy
 3. Shows a list of 25 best hikes in the world
 
     Format:
