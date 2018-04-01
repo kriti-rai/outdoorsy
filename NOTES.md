@@ -1,14 +1,19 @@
 # Outline
 
-1. CLI for 25 best hikes in the world, starting with https://localadventurer.com/25-best-hikes-in-the-world-bucket-list/
+1. CLI for the articles on the latest trend in workout trainings from https://www.bodybuilding.com/category/training.
 
-2. User types outdoorsy
-3. Shows a list of 25 best hikes in the world
+2. User types swolemate (working title)
+3. Shows a list of the articles.
 
     Format:
 
-    “1. Name of the hike      Location”
-    “2. Name of the hike      Location”
-    “3. Name of the hike      Location”
-    .....
-4. Asks user to type 1..25 to see an overview of the hike
+    ####“1. Article_1_Title
+    ####“2. Article_2_Title”
+    ####“3. Article_3_Title”
+    ####....
+4. Asks user to further type the number for a workout they are intersted in and get more info
+
+# Article class
+  1. has a title
+  2. has a URL
+  3. has workouts
