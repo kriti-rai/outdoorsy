@@ -26,8 +26,7 @@ class Outdoorsy::CLI
     #     +                                                 +
     #     +++++++++++++++++++++++++++++++++++++++++++++++++++
     # HEREDOC
-    sleep (1.5)
-    puts "Type “list” to check out the latest in workout."
+
     sleep(1.5)
     list_articles
     sleep(1.5)
@@ -39,15 +38,16 @@ class Outdoorsy::CLI
   end
 
   def list_articles
-    puts <<~HEREDOC
-        1. What Makes Dropsets So Good, But So Nasty?
-        2. 4 Tips For Staying Fit While Traveling
-        3. This Is Full-Body Training Done Right!
-        10. Your Guide to Building Next-Level Legs
-    HEREDOC
-    puts "Type 'more' to see more."
+    puts "Here is the list of articles on the latest in workout."
+    # puts <<~HEREDOC
+    #     1. What Makes Dropsets So Good, But So Nasty?
+    #     2. 4 Tips For Staying Fit While Traveling
+    #     3. This Is Full-Body Training Done Right!
+    #     10. Your Guide to Building Next-Level Legs
+    # HEREDOC
+    # puts "Type 'more' to see more."
         #(Shows 10 at a time and puts "that is the end of menu if no more articles to load")
-
+        Outdoorsy::Article.all
   end
 
   def main_menu
