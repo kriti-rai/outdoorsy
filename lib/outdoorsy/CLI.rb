@@ -47,7 +47,7 @@ class Outdoorsy::CLI
     # HEREDOC
     # puts "Type 'more' to see more."
         #(Shows 10 at a time and puts "that is the end of menu if no more articles to load")
-        Outdoorsy::Article.all
+        Outdoorsy::Article.all.each.with_index(1) {|article, i| puts "#{i}. #{article.title}"}
   end
 
   def main_menu
