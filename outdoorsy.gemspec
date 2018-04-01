@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add-development_dependency "rspec"
   spec.add-development_dependency "pry"
 
+  spec.add_dependency "nokogiri"
 end
