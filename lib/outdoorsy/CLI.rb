@@ -71,6 +71,8 @@ class Outdoorsy::CLI
         puts "Showing the workout #{input}..."
       when "menu"
         main_menu
+      else
+        puts "Invalid. Please make sure you are either typing the workout number, menu or exit."
       end
     end
   end
