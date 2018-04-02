@@ -8,10 +8,18 @@ class Outdoorsy::Scraper
     #url = doc.css(".cms-article-list--article.col.col-1 a").attribute('href').to_s
     #read_time = doc.search(".bb-read-time__time").text
     #description = doc.search("span.description").text
-
-    # doc.map do |
-
-
-
+    doc.css(".cms-article-list--article.col.col-1").map do |article|
+      article = {
+        :title => article.search("h3.title").text,
+        :url => article.search("a").attribute('href').to_s,
+        :read_time => article.search(".bb-read-time__time").text,
+        :description => article.search("span.description").text,
+        # :workouts =>
+      }
+        scraped_articles << article
+        binding.pry
+      end
+      scraped_articles
   end
+
 end
