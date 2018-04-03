@@ -22,4 +22,15 @@ class Outdoorsy::Scraper
       scraped_articles
   end
 
+  def self.scrape_workouts
+  #scrapes the articles to list out an array of workouts which might have hashes of supersets
+
+    self.scrape_page.map do |article|
+      article[:workouts] = []
+      article[:workouts] << Nokogiri::HTML(open(article[:url])).search(".cms-article-workout__exercise--title")
+      # binding.pry
+    end
+
+  end
+
 end
