@@ -1,26 +1,23 @@
 require 'pry'
 class SwoleNews::Article
   attr_accessor :title, :url, :workouts, :read_time, :description
-  # @@all = []
+  @@all = []
+
+  def initialize(article_hash)
+    #takes hash of each article and assigns the respective key and hash to the article
+    #also saves every new article created to @@all
+    article_hash.each {|k,v| self.send("#{k}=", v)}
+    @@all << self
+  end
+
+  def self.create_from_page(scrape_page)
+    #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
+    # scrape_page = SwoleNews::Scraper.scrape_page
+    scrape_page.each {|article_hash| self.new(article_hash)}
+  end
 
   def self.all
-    article_1 = self.new
-    article_2 = self.new
-
-    article_1.title = "Time Crunched? Try This 15-Minute Chest Circuit"
-    article_1.read_time = "3 min read"
-    article_1.url = "https://www.bodybuilding.com/content/time-crunched-try-this-15-minute-chest-circuit.html"
-    article_1.workouts = ["workout_1", "workout_2", "workout_3"]
-    article_1.description = "abcd"
-
-    article_2.title = "Beasts-Only Arm Workout"
-    article_2.read_time = "5 min read"
-    article_2.url = "https://www.bodybuilding.com/content/beasts-only-arm-workout.html"
-    article_2.workouts = ["workout_1", "workout_2", "workout_3"]
-    article_2.description = "abcd"
-
-    [article_1, article_2]
-
+    @@all
   end
 
   def find_by_number
