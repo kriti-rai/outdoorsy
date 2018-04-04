@@ -17,7 +17,6 @@ class SwoleNews::Scraper
         # :workouts =>
       }
         scraped_articles << article
-        binding.pry
       end
       scraped_articles
   end
