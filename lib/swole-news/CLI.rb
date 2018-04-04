@@ -33,7 +33,7 @@ class SwoleNews::CLI
     sleep(1.5)
     main_menu
     sleep(1.5)
-    workouts
+    list_workouts
     sleep (1)
     goodbye
   end
@@ -54,14 +54,8 @@ class SwoleNews::CLI
         end
   end
 
-  # def main_menu
-  #   puts "Enter the number for the article you are interested in."
-  #   #gets input
-  #   #shows the list of workouts
-  # end
-
-  def workouts
-    puts "Please pick an article to view the workouts listed inside."
+  def list_workouts
+    puts "Please pick an article by number to view the workouts listed inside."
     #lists specific workouts in the article and gives users to get instructions on each workout
     input = nil
     while input != "exit"
