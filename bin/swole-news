@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require './lib/outdoorsy'
-Outdoorsy::CLI.new.call
+SwoleNews::CLI.new.call
