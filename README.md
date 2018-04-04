@@ -1,5 +1,5 @@
 # Outdoorsy
-This is a mock project for the actual CLI gem project. My idea is to create a gem that scrapes the latest training article data from bodybuilding.com and provides end-users the list of article from which they can access training instructions.
+The swole-news CLI gem scrapes the latest training articles from www.bodybuilding.com and provides end-users with the list of articles from which they can access specific workouts.
 
 
 ## Installation
@@ -7,7 +7,7 @@ This is a mock project for the actual CLI gem project. My idea is to create a ge
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'outdoorsy'
+gem 'swole-news'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install outdoorsy
+    $ gem install swole-news
 
 ## Usage
 
