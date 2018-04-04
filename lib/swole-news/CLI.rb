@@ -58,8 +58,6 @@ class SwoleNews::CLI
   def main_menu
     puts "Enter the number for the article you are interested in."
     #gets input
-    #shows the URL to the article for the full content.
-    puts "Please follow the URL to read the full article."
     #shows the list of workouts
   end
 
