@@ -1,4 +1,4 @@
-class SwoleMate::Scraper
+class SwoleNews::Scraper
 
   def self.scrape_page
     #scrapes the URL and gives an array of articles in scraped_articles
