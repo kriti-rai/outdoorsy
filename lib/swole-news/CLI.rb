@@ -1,4 +1,6 @@
 #CLI Controller
+require 'colorize'
+
 class SwoleNews::CLI
 
   def call
@@ -46,11 +48,10 @@ class SwoleNews::CLI
   def list_articles
     puts "Here is the list of articles on the latest in workout."
         makes_articles.each.with_index(1) do |article, i|
-          puts "#{i}. #{article.title}"
-          puts "#{article.read_time}"
-          puts "#{article.description}"
-          puts "To read more go to:" + "#{article.url}"
-          puts "-------------------------"
+          puts "#{i}. #{article.title}".colorize(:red) + " * #{article.read_time} *"
+          puts "#{article.description}".colorize(:yellow)
+          puts "To read more go to:".colorize(:yellow) + " #{article.url}".colorize(:blue)
+          puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
         end
   end
 
