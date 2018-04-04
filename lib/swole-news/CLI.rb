@@ -37,17 +37,21 @@ class SwoleNews::CLI
     goodbye
   end
 
+  def makes_articles
+    scraped_articles = SwoleNews::Scraper.scrape_page
+    SwoleNews::Article.create_from_page(scraped_articles)
+    SwoleNews::Article.all
+  end
+
   def list_articles
     puts "Here is the list of articles on the latest in workout."
-    # puts <<~HEREDOC
-    #     1. What Makes Dropsets So Good, But So Nasty?
-    #     2. 4 Tips For Staying Fit While Traveling
-    #     3. This Is Full-Body Training Done Right!
-    #     10. Your Guide to Building Next-Level Legs
-    # HEREDOC
-    # puts "Type 'more' to see more."
-        #(Shows 10 at a time and puts "that is the end of menu if no more articles to load")
-        SwoleNews::Article.all.each.with_index(1) {|article, i| puts "#{i}. #{article.title}"}
+        makes_articles.each.with_index(1) do |article, i|
+          puts "#{i}. #{article.title}"
+          puts "#{article.read_time}"
+          puts "#{article.description}"
+          puts "To read more go to:" + "#{article.url}"
+          puts "-------------------------"
+        end
   end
 
   def main_menu
