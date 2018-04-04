@@ -5,7 +5,7 @@
 ## CLI
   1. User types swolemate (working title)
   2. Shows a list of the articles. (10 at a time)
-    Format:
+    Format
       1. Article_1_Title (maybe colorize)
         <short description>
         <Read time>
@@ -23,13 +23,13 @@
   3. Asks the user to type 'more' to view more articles. (shows 10 more if available, or all if less than 10, says 'no more' if 0 remaining) or...
 
   4. Asks user to type the number (string) of an article if they would like to see the workouts listed on it.
-    Format:
+    Format
       1. Workout_1_Title (maybe colorize)
         <description: sets and reps>
         <duration>
 
 ## Article Class
-  Format:
+  Format
     1. has a title
     2. has a URL
     3. has a short description
