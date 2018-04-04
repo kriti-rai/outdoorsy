@@ -7,7 +7,7 @@
   1. User types swolemate (working title)
   2. Shows a list of the articles. (10 at a time)
 
-  Format
+    Format
     1. Article_1_Title (maybe colorize)
       <short description>
       <Read time>
@@ -32,7 +32,6 @@
       <duration>
 
 ## Article Class
-  Format
   1. has a title
   2. has a URL
   3. has a short description
@@ -40,7 +39,6 @@
   5. has workouts
 
 ## Workout Class
-  Format
    1. has a title
    2. has short description (with reps and sets)
 
