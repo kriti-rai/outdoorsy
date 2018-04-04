@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    outdoorsy (0.1.0)
+    swole-news (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -22,7 +22,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.16)
   nokogiri
-  outdoorsy!
+  swole-news!
   pry
   rake (~> 10.0)
 
