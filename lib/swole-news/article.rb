@@ -1,5 +1,5 @@
 require 'pry'
-class Outdoorsy::Article
+class SwoleNews::Article
   attr_accessor :title, :url, :workouts, :read_time, :description
   # @@all = []
 

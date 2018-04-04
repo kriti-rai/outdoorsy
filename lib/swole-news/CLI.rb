@@ -1,5 +1,5 @@
 #CLI Controller
-class Outdoorsy::CLI
+class SwoleNews::CLI
 
   def call
     puts "Welcome!"
