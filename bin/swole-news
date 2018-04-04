@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require './lib/outdoorsy'
+require './lib/swole-news'
 SwoleNews::CLI.new.call
