@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "outdoorsy/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "outdoorsy"
-  spec.version       = Outdoorsy::VERSION
+  spec.name          = "swole-news"
+  spec.version       = SwoleNews::VERSION
   spec.authors       = ["'Kriti Rai'"]
   spec.email         = ["'kriti.rai@gmail.com'"]
 
-  spec.summary       = "Lists world's 25 best hikes for outdoors lovers."
-  spec.homepage      = "https://github.com/kriti-rai/outdoorsy"
+  spec.summary       = "Pulls up the latest articles in workouts"
+  spec.homepage      = "https://github.com/kriti-rai/swole-news"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
