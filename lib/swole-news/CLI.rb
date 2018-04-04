@@ -4,6 +4,7 @@ require 'colorize'
 class SwoleNews::CLI
 
   def call
+    makes_articles
     puts "Welcome!"
     # puts <<~HEREDOC
     #                 ||                      ||
@@ -30,10 +31,8 @@ class SwoleNews::CLI
     # HEREDOC
 
     sleep(1.5)
-    list_articles
-    sleep(1.5)
     main_menu
-    sleep (1)
+    sleep(1.5)
     workouts
     sleep (1)
     goodbye
@@ -45,7 +44,7 @@ class SwoleNews::CLI
     SwoleNews::Article.all
   end
 
-  def list_articles
+  def main_menu
     puts "Here is the list of articles on the latest in workout."
         makes_articles.each.with_index(1) do |article, i|
           puts "#{i}. #{article.title}".colorize(:red) + " * #{article.read_time} *"
@@ -55,13 +54,14 @@ class SwoleNews::CLI
         end
   end
 
-  def main_menu
-    puts "Enter the number for the article you are interested in."
-    #gets input
-    #shows the list of workouts
-  end
+  # def main_menu
+  #   puts "Enter the number for the article you are interested in."
+  #   #gets input
+  #   #shows the list of workouts
+  # end
 
   def workouts
+    puts "Please pick an article to view the workouts listed inside."
     #lists specific workouts in the article and gives users to get instructions on each workout
     input = nil
     while input != "exit"
