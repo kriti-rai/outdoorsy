@@ -33,7 +33,7 @@ class SwoleNews::CLI
     sleep(1.5)
     main_menu
     sleep(1.5)
-    list_workouts
+    action
   end
 
   def makes_articles
@@ -44,7 +44,7 @@ class SwoleNews::CLI
 
   def main_menu
     puts "Here is the list of articles on the latest in workout."
-        makes_articles.map.with_index(1) do |article, i|
+        makes_articles.each.with_index(1) do |article, i|
           puts "#{i}. #{article.title}".colorize(:red) + " * #{article.read_time} *"
           puts "#{article.description}".colorize(:yellow)
           puts "To read more go to:".colorize(:yellow) + " #{article.url}".colorize(:blue)
@@ -52,14 +52,12 @@ class SwoleNews::CLI
         end
   end
 
-  def list_workouts
+  def action
     #asks for input
     #calls Article.find_by_number(input) to return the article by number
     #calls Scraper.scrape_workouts(artile_url) to return the list of workouts
     # puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
 
-    # input = nil
-    # while input != "exit"
       puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
       input = gets.strip.downcase
       if input.to_i.between?(1, SwoleNews::Article.all.size)
@@ -71,12 +69,21 @@ class SwoleNews::CLI
         if input == "workout"
           puts "Workout_1"
           puts "Workout_2"
+          puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+            if input == "menu"
+              main_menu
+            elsif input == "exit"
+              goodbye
+            else
+              puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+              list_workouts
+            end
         elsif input == "menu"
           main_menu
         elsif input == "exit"
           goodbye
         else
-          put "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
+          puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
         end
       elsif input == "exit"
         goodbye
@@ -84,7 +91,9 @@ class SwoleNews::CLI
         puts "Invalid. Please make sure you are either typing the article number or 'exit'."
         list_workouts
       end
-    # end
+  end
+
+  def list_workout
   end
 
   def goodbye
