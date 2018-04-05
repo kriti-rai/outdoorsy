@@ -20,6 +20,9 @@ class SwoleNews::Article
     @@all
   end
 
-  def find_by_number
+  def self.find_by_number(input)
+    #if input==index+1 return the respective article
+    #else puts an "invalid" message and asks for input again
+    self.all.detect.with_index(1){|article,i| i == input}
   end
 end
