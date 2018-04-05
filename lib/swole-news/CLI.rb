@@ -61,7 +61,17 @@ class SwoleNews::CLI
     #calls Scraper.scrape_workouts(artile_url) to return the list of workouts
 
 
-    puts "Please pick an article by number to view the workouts listed inside."
+    puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
+
+    input = gets.strip.downcase
+    # while input != "exit"
+      if input.between?(1,SwoleNews::Article.all.size)
+        SwoleNews::Article.find_by_number(input)
+      else
+        puts "Invalid. Please make sure you are either typing the article number or 'exit'."
+        list_workouts
+      end
+    end
     #lists specific workouts in the article and gives users to get instructions on each workout
     # input = nil
     # while input != "exit"
@@ -77,7 +87,7 @@ class SwoleNews::CLI
     #   else
     #     puts "Invalid. Please make sure you are either typing the workout number, menu or exit."
     #   end
-    end
+    # end
   end
 
   def goodbye
