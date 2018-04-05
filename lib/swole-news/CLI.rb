@@ -67,17 +67,17 @@ class SwoleNews::CLI
         puts "If yes, please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
         input = gets.strip.downcase
         if input == "workout"
-          puts "Workout_1"
-          puts "Workout_2"
+          list_workouts
           puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-            if input == "menu"
-              main_menu
-            elsif input == "exit"
-              goodbye
-            else
-              puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
-              list_workouts
-            end
+          input = gets.strip.downcase
+          if input == "menu"
+            main_menu
+          elsif input == "exit"
+            goodbye
+          else
+            puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+            list_workouts
+          end
         elsif input == "menu"
           main_menu
         elsif input == "exit"
@@ -93,7 +93,10 @@ class SwoleNews::CLI
       end
   end
 
-  def list_workout
+  def list_workouts
+    #This will pull from Swolenews::Workout class
+    puts "Workout_1"
+    puts "Workout_2"
   end
 
   def goodbye
