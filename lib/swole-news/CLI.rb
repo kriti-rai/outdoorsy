@@ -34,8 +34,6 @@ class SwoleNews::CLI
     main_menu
     sleep(1.5)
     list_workouts
-    sleep (1)
-    goodbye
   end
 
   def makes_articles
@@ -46,7 +44,7 @@ class SwoleNews::CLI
 
   def main_menu
     puts "Here is the list of articles on the latest in workout."
-        makes_articles.each.with_index(1) do |article, i|
+        makes_articles.map.with_index(1) do |article, i|
           puts "#{i}. #{article.title}".colorize(:red) + " * #{article.read_time} *"
           puts "#{article.description}".colorize(:yellow)
           puts "To read more go to:".colorize(:yellow) + " #{article.url}".colorize(:blue)
@@ -60,20 +58,33 @@ class SwoleNews::CLI
     #calls Scraper.scrape_workouts(artile_url) to return the list of workouts
     # puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
 
-    input = nil
-    while input != "exit"
+    # input = nil
+    # while input != "exit"
       puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
       input = gets.strip.downcase
       if input.to_i.between?(1, SwoleNews::Article.all.size)
         article = SwoleNews::Article.find_by_number(input)
         puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
         puts "Would you like to view the workouts listed inside the article?"
-        puts "If yes, please type 'workout' or 'exit' to exit"
+        puts "If yes, please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
+        input = gets.strip.downcase
+        if input == "workout"
+          puts "Workout_1"
+          puts "Workout_2"
+        elsif input == "menu"
+          main_menu
+        elsif input == "exit"
+          goodbye
+        else
+          put "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
+        end
+      elsif input == "exit"
+        goodbye
       else
         puts "Invalid. Please make sure you are either typing the article number or 'exit'."
         list_workouts
       end
-    end
+    # end
   end
 
   def goodbye
