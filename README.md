@@ -1,4 +1,4 @@
-# Outdoorsy
+# SwoleNews
 The swole-news CLI gem scrapes the latest training articles from www.bodybuilding.com and provides end-users with the list of articles from which they can access specific workouts.
 
 
