@@ -66,30 +66,30 @@ class SwoleNews::CLI
         puts "Would you like to view the workouts listed inside the article?"
         puts "If yes, please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
         input = gets.strip.downcase
-        if input == "workout"
-          list_workouts
-          puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-          input = gets.strip.downcase
-          if input == "menu"
+          if input == "workout"
+            list_workouts
+            puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+            input = gets.strip.downcase
+              if input == "menu"
+                main_menu
+              elsif input == "exit"
+                goodbye
+              else
+                puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+                list_workouts
+              end
+          elsif input == "menu"
             main_menu
           elsif input == "exit"
             goodbye
           else
-            puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
-            list_workouts
+            puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
           end
-        elsif input == "menu"
-          main_menu
-        elsif input == "exit"
-          goodbye
-        else
-          puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
-        end
       elsif input == "exit"
         goodbye
       else
         puts "Invalid. Please make sure you are either typing the article number or 'exit'."
-        list_workouts
+        action
       end
   end
 
