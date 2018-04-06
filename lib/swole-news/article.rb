@@ -10,10 +10,10 @@ class SwoleNews::Article
     @@all << self
   end
 
-  def self.create_from_page(scrape_page)
+  def self.create_from_collection(workout_array)
     #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
     # scrape_page = SwoleNews::Scraper.scrape_page
-    scrape_page.each {|article_hash| self.new(article_hash)}
+    workout_array.each {|article_hash| self.new(article_hash)}
   end
 
   def self.all
