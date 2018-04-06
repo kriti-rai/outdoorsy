@@ -14,7 +14,6 @@ class SwoleNews::Scraper
         :url => article.search("a").attribute('href').to_s,
         :read_time => article.search(".bb-read-time__time").text,
         :description => article.search("span.description").text,
-        # :workouts =>
       }
         scraped_articles << article
       end
