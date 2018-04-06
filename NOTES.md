@@ -37,12 +37,14 @@
   3. has a short description
   4. has a read-time
   5. has workouts
+  6. each article has 1 or more workouts
 
 ## Workout Class
    Scrapes each article.url to list out workouts inside
 
    1. has a title
    2. has short description (with reps and sets)
+   3. belongs to an article
 
 ## Scraper Class
   Scrapes the website to list out the articles and further scrapes each article to provide a list of workouts inside.
