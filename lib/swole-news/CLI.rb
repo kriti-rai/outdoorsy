@@ -58,8 +58,8 @@ class SwoleNews::CLI
     #calls Scraper.scrape_workouts(artile_url) to return the list of workouts
     # puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
 
-      puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
-      input = gets.strip.downcase
+    puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
+    input = gets.strip.downcase
       if input.to_i.between?(1, SwoleNews::Article.all.size)
         article = SwoleNews::Article.find_by_number(input)
         puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
@@ -69,22 +69,24 @@ class SwoleNews::CLI
           if input == "workout"
             list_workouts
             puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-            input = gets.strip.downcase
-              if input == "menu"
-                main_menu
-              elsif input == "exit"
-                goodbye
-              else
-                puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
-                list_workouts
-              end
-          elsif input == "menu"
-            main_menu
-          elsif input == "exit"
-            goodbye
-          else
-            puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
-          end
+              entry = nil
+              until entry == "menu" && entry == "exit"
+                i = gets.strip.downcase
+                  if entry == "menu"
+                    main_menu
+                  elsif entry == "exit"
+                    goodbye
+                  else
+                    puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+                  end
+                end
+            elsif input == "menu"
+              main_menu
+            elsif input == "exit"
+              goodbye
+            else
+              puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
+            end
       elsif input == "exit"
         goodbye
       else
