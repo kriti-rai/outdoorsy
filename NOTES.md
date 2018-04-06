@@ -39,6 +39,8 @@
   5. has workouts
 
 ## Workout Class
+   Scrapes each article.url to list out workouts inside
+
    1. has a title
    2. has short description (with reps and sets)
 
