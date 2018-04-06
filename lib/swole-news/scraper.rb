@@ -32,7 +32,6 @@ class SwoleNews::Scraper
           workout_array << workout
         end
       workout_array
-    end
   end
 
 end
