@@ -38,7 +38,7 @@ class SwoleNews::CLI
 
   def makes_articles
     scraped_articles = SwoleNews::Scraper.scrape_page
-    SwoleNews::Article.create_from_page(scraped_articles)
+    SwoleNews::Article.create_from_collection(scraped_articles)
     SwoleNews::Article.all
   end
 
