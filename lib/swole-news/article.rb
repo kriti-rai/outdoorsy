@@ -11,10 +11,10 @@ class SwoleNews::Article
     add_workouts
   end
 
-  def self.create_from_collection(workout_array)
+  def self.create_from_collection(article_array)
     #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
     # scrape_page = SwoleNews::Scraper.scrape_page
-    workout_array.each {|article_hash| self.new(article_hash)}
+    article_array.each {|article_hash| self.new(article_hash)}
   end
 
   def self.all
@@ -26,12 +26,6 @@ class SwoleNews::Article
     #else puts an "invalid" message and asks for input again
     input = input.to_i
     self.all.detect.with_index(1){|article,i| i == input}
-  end
-
-  def add_workouts
-    @@all.each do |article|
-      self.workouts = SwoleNews::Scraper.scrape_workouts(article.url)
-    end
   end
 
 end
