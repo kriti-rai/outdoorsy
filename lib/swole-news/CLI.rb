@@ -1,5 +1,6 @@
 #CLI Controller
 require 'colorize'
+require 'pry'
 
 class SwoleNews::CLI
 
@@ -41,13 +42,15 @@ class SwoleNews::CLI
     scraped_articles = SwoleNews::Scraper.scrape_page
     SwoleNews::Article.create_from_collection(scraped_articles)
     SwoleNews::Article.all
+    # binding.pry
   end
 
-  def make_workouts
+  def makes_workouts
     SwoleNews::Article.all.each do |article|
       workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
       article.workouts << SwoleNews::Workout.create_from_collection(workout_array)
     end
+    binding.pry
   end
 
   def main_menu
