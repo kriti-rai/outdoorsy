@@ -59,9 +59,9 @@ class SwoleNews::CLI
     # puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
 
     puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
-    input = gets.strip.downcase
-      if input.to_i.between?(1, SwoleNews::Article.all.size)
-        article = SwoleNews::Article.find_by_number(input)
+    input_1 = gets.strip.downcase
+      if input_1.to_i.between?(1, SwoleNews::Article.all.size)
+        article = SwoleNews::Article.find_by_number(input_1)
         puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
         puts "Would you like to view the workouts listed inside the article?"
         puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
@@ -71,13 +71,13 @@ class SwoleNews::CLI
             if input_2 == "yes"
               list_workouts
               puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-                entry = nil
-                until entry == "menu" && entry == "exit"
-                  entry = gets.strip.downcase
-                    if entry == "menu"
+                input_3 = nil
+                until input_3 == "menu" && input_3 == "exit"
+                  input_3 = gets.strip.downcase
+                    if input_3 == "menu"
                       main_menu
                       break
-                    elsif entry == "exit"
+                    elsif input_3 == "exit"
                       goodbye
                       break
                     else
@@ -94,7 +94,7 @@ class SwoleNews::CLI
                 puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
               end
           end
-      elsif input == "exit"
+      elsif input_1 == "exit"
         goodbye
       else
         puts "Invalid. Please make sure you are either typing the article number or 'exit'."
