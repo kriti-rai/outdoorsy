@@ -8,7 +8,7 @@ class SwoleNews::Article
     #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
     @@all << self
-    # @workouts = []
+    add_workouts
   end
 
   def self.create_from_collection(workout_array)
@@ -27,4 +27,11 @@ class SwoleNews::Article
     input = input.to_i
     self.all.detect.with_index(1){|article,i| i == input}
   end
+
+  def add_workouts
+    @@all.each do |article|
+      self.workouts = SwoleNews::Scraper.scrape_workouts(article.url)
+    end
+  end
+
 end
