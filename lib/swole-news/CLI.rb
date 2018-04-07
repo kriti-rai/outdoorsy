@@ -96,6 +96,7 @@ class SwoleNews::CLI
                     end
                 elsif input_2 == "menu"
                   main_menu
+                  action
                   break
                 elsif input_2 == "exit"
                   goodbye
@@ -114,6 +115,9 @@ class SwoleNews::CLI
 
   def list_workouts
     #This will pull from Swolenews::Workout class
+    sleep(1)
+    puts "Now listing the workouts...".colorize(:blue)
+    sleep(1.5)
     puts "Workout_1"
     puts "Workout_2"
   end
