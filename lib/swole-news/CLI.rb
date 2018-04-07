@@ -52,6 +52,11 @@ class SwoleNews::CLI
         end
   end
 
+  def view_articles(input)  ----CHANGE
+    article = SwoleNews::Article.find_by_number(input)
+    puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
+  end
+
   def action
     #asks for input
     #calls Article.find_by_number(input) to return the article by number
@@ -61,45 +66,45 @@ class SwoleNews::CLI
     puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
     input_1 = gets.strip.downcase
       if input_1.to_i.between?(1, SwoleNews::Article.all.size)
-        article = SwoleNews::Article.find_by_number(input_1)
-        puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
-        puts "Would you like to view the workouts listed inside the article?"
-        puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
-        input_2 = nil
-        until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
-          input_2 = gets.strip.downcase
-            if input_2 == "yes"
-              list_workouts
-              puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-                input_3 = nil
-                until input_3 == "menu" && input_3 == "exit"
-                  input_3 = gets.strip.downcase
-                    if input_3 == "menu"
-                      main_menu
-                      break
-                    elsif input_3 == "exit"
-                      goodbye
-                      break
-                    else
-                      puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+        view_articles(input_1)
+          puts "Would you like to view the workouts listed inside the article?"
+          puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+          input_2 = nil
+          until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
+            input_2 = gets.strip.downcase
+              if input_2 == "yes"
+                list_workouts
+                puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+                  input_3 = nil
+                  until input_3 == "menu" && input_3 == "exit"
+                    input_3 = gets.strip.downcase
+                      if input_3 == "menu"
+                        main_menu
+                        action
+                        break
+                      elsif input_3 == "exit"
+                        goodbye
+                        break
+                      else
+                        puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+                      end
                     end
-                  end
-              elsif input_2 == "menu"
-                main_menu
-                break
-              elsif input_2 == "exit"
-                goodbye
-                break
-              else
-                puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+                elsif input_2 == "menu"
+                  main_menu
+                  break
+                elsif input_2 == "exit"
+                  goodbye
+                  break
+                else
+                  puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+                end
               end
-          end
-      elsif input_1 == "exit"
-        goodbye
-      else
-        puts "Invalid. Please make sure you are either typing the article number or 'exit'."
-        action
-      end
+        elsif input_1 == "exit"
+          goodbye
+        else
+          puts "Invalid. Please make sure you are either typing the article number or 'exit'."
+          action
+        end
   end
 
   def list_workouts
