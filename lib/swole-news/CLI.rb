@@ -95,10 +95,8 @@ class SwoleNews::CLI
                 elsif input_2 == "menu"
                   main_menu
                   action
-                  break
                 elsif input_2 == "exit"
                   goodbye
-                  break
                 else
                   puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
                 end
