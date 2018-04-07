@@ -23,7 +23,7 @@ class SwoleNews::Scraper
   def self.scrape_workouts(article_url)
   #scrapes the articles to list out an array of workouts which might have hashes of supersets
       workout_array = []
-        doc = Nokogiri::HTML(open(article.url))
+        doc = Nokogiri::HTML(open(article_url))
           doc.search(".cms-article-list__content--container").each do |content|
             workout = {
               :title => content.search(".cms-article-workout__exercise--title").text,
