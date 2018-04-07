@@ -65,28 +65,35 @@ class SwoleNews::CLI
         puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
         puts "Would you like to view the workouts listed inside the article?"
         puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
-        input = gets.strip.downcase
-          if input == "yes"
-            list_workouts
-            puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-              entry = nil
-              until entry == "menu" && entry == "exit"
-                entry = gets.strip.downcase
-                  if entry == "menu"
-                    main_menu
-                  elsif entry == "exit"
-                    goodbye
-                  else
-                    puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+        input_2 = nil
+        until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
+          input_2 = gets.strip.downcase
+            if input_2 == "yes"
+              list_workouts
+              puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+                entry = nil
+                until entry == "menu" && entry == "exit"
+                  entry = gets.strip.downcase
+                    if entry == "menu"
+                      main_menu
+                      break
+                    elsif entry == "exit"
+                      goodbye
+                      break
+                    else
+                      puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+                    end
                   end
-                end
-            elsif input == "menu"
-              main_menu
-            elsif input == "exit"
-              goodbye
-            else
-              puts "Not sure what you entered. Please type 'workout' or 'menu' to go back to the main menu or 'exit' to exit"
-            end
+              elsif input_2 == "menu"
+                main_menu
+                break
+              elsif input_2 == "exit"
+                goodbye
+                break
+              else
+                puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+              end
+          end
       elsif input == "exit"
         goodbye
       else
