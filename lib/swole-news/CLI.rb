@@ -79,7 +79,7 @@ class SwoleNews::CLI
     input_1 = gets.strip.downcase
       if input_1.to_i.between?(1, SwoleNews::Article.all.size)
         article = SwoleNews::Article.find_by_number(input_1)
-        # binding.pry
+        binding.pry
         view_articles(article, input_1)
           puts "Would you like to view the workouts listed inside the article?"
           puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
@@ -119,7 +119,6 @@ class SwoleNews::CLI
   end
 
   def list_workouts(article)
-    #This will pull from Swolenews::Workout class
     sleep(1)
     puts "Now listing the workouts...".colorize(:blue)
     sleep(1.5)
