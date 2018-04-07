@@ -4,7 +4,9 @@ class SwoleNews::Workout
   @@all =[]
   def initialize(workout_hash)
     workout_hash.each {|k,v| self.send("#{k}=",v)}
-    @@all << self
+    # @@all << self
+    #this needs to be re-written
+    #workout needs to know they belong to an article
   end
 
   def self.create_from_collection(workout_array)
