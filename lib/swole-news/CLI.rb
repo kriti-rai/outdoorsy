@@ -81,15 +81,13 @@ class SwoleNews::CLI
                 list_workouts
                 puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
                   input_3 = nil
-                  until input_3 == "menu" && input_3 == "exit"
+                  until input_3 != "menu" && input_3 != "exit"
                     input_3 = gets.strip.downcase
                       if input_3 == "menu"
                         main_menu
                         action
-                        break
                       elsif input_3 == "exit"
                         goodbye
-                        break
                       else
                         puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
                       end
