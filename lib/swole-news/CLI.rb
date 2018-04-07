@@ -55,7 +55,7 @@ class SwoleNews::CLI
   def view_articles(input)
     article = SwoleNews::Article.find_by_number(input)
     sleep(1)
-    puts "Showing article...".colorize(:blue)
+    puts "Showing article no.#{input}".colorize(:blue)
     sleep(1.5)
     puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
     puts "- - - - - - - - - - - - - - - -".colorize(:green)
