@@ -13,7 +13,7 @@ class SwoleNews::Scraper
         :title => article.search("h3.title").text,
         :url => article.search("a").attribute('href').to_s,
         :read_time => article.search(".bb-read-time__time").text,
-        :description => article.search("span.description").text,
+        :description => article.search("span.description").text
       }
         article_array << article
       end
