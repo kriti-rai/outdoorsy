@@ -121,6 +121,7 @@ class SwoleNews::CLI
   end
 
   def goodbye
-    puts "Keep up the good work and stay swole! See you soon!"
+    sleep(1)
+    puts "Keep up the good work and stay swole! See you soon!".colorize(:yellow)
   end
 end
