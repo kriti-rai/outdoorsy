@@ -1,6 +1,6 @@
 require 'pry'
 class SwoleNews::Workout
-  attr_accessor :title, :definition
+  attr_accessor :title, :definition, :article
   @@all = []
   def initialize(workout_hash)
     workout_hash.each {|k,v| self.send("#{k}=",v)}
