@@ -58,8 +58,8 @@ class SwoleNews::CLI
         end
   end
 
-  def view_articles(input)
-    article = SwoleNews::Article.find_by_number(input)
+  def view_articles(article, input)
+    # article = SwoleNews::Article.find_by_number(input)
     sleep(1)
     puts "Viewing article no.#{input}".colorize(:blue)
     sleep(1.5)
@@ -77,14 +77,15 @@ class SwoleNews::CLI
     puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
     input_1 = gets.strip.downcase
       if input_1.to_i.between?(1, SwoleNews::Article.all.size)
-        view_articles(input_1)
+        article = SwoleNews::Article.find_by_number(input_1)
+        view_articles(article, input_1)
           puts "Would you like to view the workouts listed inside the article?"
           puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
           input_2 = nil
           until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
             input_2 = gets.strip.downcase
               if input_2 == "yes"
-                list_workouts
+                list_workouts(article)
                 puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
                   input_3 = nil
                   until input_3 != "menu" && input_3 != "exit"
@@ -115,13 +116,15 @@ class SwoleNews::CLI
         end
   end
 
-  def list_workouts
+  def list_workouts(article)
     #This will pull from Swolenews::Workout class
     sleep(1)
     puts "Now listing the workouts...".colorize(:blue)
     sleep(1.5)
-    puts "Workout_1"
-    puts "Workout_2"
+    article.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.title}"
+      puts "**#{workout.definition}**"
+    end
   end
 
   def goodbye
