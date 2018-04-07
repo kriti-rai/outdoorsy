@@ -6,7 +6,7 @@ class SwoleNews::CLI
 
   def call
     makes_articles
-    make_workouts
+    # make_workouts
     puts "Welcome!"
     # puts <<~HEREDOC
     #                 ||                      ||
@@ -41,19 +41,11 @@ class SwoleNews::CLI
   def makes_articles
     scraped_articles = SwoleNews::Scraper.scrape_page
     SwoleNews::Article.create_from_collection(scraped_articles)
-    SwoleNews::Article.all
-    # binding.pry
-  end
-
-  def makes_workouts
-    workouts = []
-    makes_articles.each do |article|
+    SwoleNews::Article.all.each do |article|
       workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
-      workouts = SwoleNews::Workout.create_from_collection(workout_array)
-      #need to tell the workouts they belong to an article
-      # binding.pry
+      article.workouts = SwoleNews::Workout.create_from_collection(workout_array)
     end
-    # binding.pry
+    SwoleNews::Article.all
   end
 
   def main_menu
