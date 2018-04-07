@@ -47,7 +47,7 @@ class SwoleNews::CLI
 
   def makes_workouts
     workouts = []
-    makes_articles.each do |article| binding.pry
+    makes_articles.each do |article|
       workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
       workouts = SwoleNews::Workout.create_from_collection(workout_array)
       #need to tell the workouts they belong to an article
