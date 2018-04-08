@@ -1,7 +1,12 @@
 #CLI Controller
+require 'colorize'
+require 'pry'
+
 class SwoleNews::CLI
 
   def call
+    makes_articles
+    # make_workouts
     puts "Welcome!"
     # puts <<~HEREDOC
     #                 ||                      ||
@@ -28,56 +33,103 @@ class SwoleNews::CLI
     # HEREDOC
 
     sleep(1.5)
-    list_articles
-    sleep(1.5)
     main_menu
-    sleep (1)
-    workouts
-    sleep (1)
-    goodbye
+    sleep(1.5)
+    action
   end
 
-  def list_articles
-    puts "Here is the list of articles on the latest in workout."
-    # puts <<~HEREDOC
-    #     1. What Makes Dropsets So Good, But So Nasty?
-    #     2. 4 Tips For Staying Fit While Traveling
-    #     3. This Is Full-Body Training Done Right!
-    #     10. Your Guide to Building Next-Level Legs
-    # HEREDOC
-    # puts "Type 'more' to see more."
-        #(Shows 10 at a time and puts "that is the end of menu if no more articles to load")
-        SwoleNews::Article.all.each.with_index(1) {|article, i| puts "#{i}. #{article.title}"}
+  def makes_articles
+    scraped_articles = SwoleNews::Scraper.scrape_page
+    SwoleNews::Article.create_from_collection(scraped_articles)
+    SwoleNews::Article.all.each do |article|
+      workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
+      SwoleNews::Workout.create_from_collection(workout_array)
+      article.workouts = SwoleNews::Workout.all
+    end
+    SwoleNews::Article.all
   end
 
   def main_menu
-    puts "Enter the number for the article you are interested in."
-    #gets input
-    #shows the URL to the article for the full content.
-    puts "Please follow the URL to read the full article."
-    #shows the list of workouts
+    puts "Here is the list of articles on the latest in workout."
+        makes_articles.each.with_index(1) do |article, i|
+          puts "#{i}. #{article.title}".colorize(:red) + " * #{article.read_time} *"
+          puts "#{article.description}".colorize(:yellow)
+          puts "To read more go to:".colorize(:yellow) + " #{article.url}".colorize(:blue)
+          puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
+        end
   end
 
-  def workouts
-    #lists specific workouts in the article and gives users to get instructions on each workout
-    input = nil
-    while input != "exit"
-      puts "Please enter the number for the workout you are interested in or enter 'menu' to go back to the main menu. Enter 'exit' to exit"
-      input = gets.strip.downcase
-      case input
-      when "1"
-        puts "Showing the workout #{input}..."
-      when "2"
-        puts "Showing the workout #{input}..."
-      when "menu"
-        main_menu
-      else
-        puts "Invalid. Please make sure you are either typing the workout number, menu or exit."
-      end
+  def view_articles(article, input)
+    # article = SwoleNews::Article.find_by_number(input)
+    sleep(1)
+    puts "Viewing article no.#{input}".colorize(:blue)
+    sleep(1.5)
+    puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
+    puts "- - - - - - - - - - - - - - - -".colorize(:green)
+    sleep(0.5)
+  end
+
+  def action
+    #asks for input
+    #calls Article.find_by_number(input) to return the article by number
+    #calls Scraper.scrape_workouts(artile_url) to return the list of workouts
+    # puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
+
+    puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
+    input_1 = gets.strip.downcase
+      if input_1.to_i.between?(1, SwoleNews::Article.all.size)
+        article = SwoleNews::Article.find_by_number(input_1)
+        binding.pry
+        view_articles(article, input_1)
+          puts "Would you like to view the workouts listed inside the article?"
+          puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+          input_2 = nil
+          until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
+            input_2 = gets.strip.downcase
+              if input_2 == "yes"
+                list_workouts(article)
+                puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+                  input_3 = nil
+                  until input_3 != "menu" && input_3 != "exit"
+                    input_3 = gets.strip.downcase
+                      if input_3 == "menu"
+                        main_menu
+                        action
+                      elsif input_3 == "exit"
+                        goodbye
+                      else
+                        puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
+                      end
+                    end
+                elsif input_2 == "menu"
+                  main_menu
+                  action
+                elsif input_2 == "exit"
+                  goodbye
+                else
+                  puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+                end
+              end
+        elsif input_1 == "exit"
+          goodbye
+        else
+          puts "Invalid. Please make sure you are either typing the article number or 'exit'."
+          action
+        end
+  end
+
+  def list_workouts(article)
+    sleep(1)
+    puts "Now listing the workouts...".colorize(:blue)
+    sleep(1.5)
+    article.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.title}"
+      puts "**#{workout.definition}**"
     end
   end
 
   def goodbye
-    puts "Keep up the good work and stay swole! See you soon!"
+    sleep(1)
+    puts "Keep up the good work and stay swole! See you soon!".colorize(:yellow)
   end
 end
