@@ -41,11 +41,11 @@ class SwoleNews::CLI
   def makes_articles
     scraped_articles = SwoleNews::Scraper.scrape_page
     SwoleNews::Article.create_from_collection(scraped_articles)
-    SwoleNews::Article.all.each do |article|
-      workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
-      SwoleNews::Workout.create_from_collection(workout_array)
-      article.workouts = SwoleNews::Workout.all
-    end
+    # SwoleNews::Article.all.each do |article|
+    #   workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
+    #   SwoleNews::Workout.create_from_collection(workout_array)
+    #   article.workouts = SwoleNews::Workout.all
+    # end
     SwoleNews::Article.all
   end
 
@@ -79,12 +79,11 @@ class SwoleNews::CLI
     input_1 = gets.strip.downcase
       if input_1.to_i.between?(1, SwoleNews::Article.all.size)
         article = SwoleNews::Article.find_by_number(input_1)
-        binding.pry
         view_articles(article, input_1)
           puts "Would you like to view the workouts listed inside the article?"
           puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
           input_2 = nil
-          until input_2 == "yes" && input_2 == "menu" && input_2 == "exit"
+          while input_2 != "exit"
             input_2 = gets.strip.downcase
               if input_2 == "yes"
                 list_workouts(article)
@@ -101,15 +100,16 @@ class SwoleNews::CLI
                         puts "Not sure what you entered. Please type 'menu' to go back to the main menu or 'exit' to exit"
                       end
                     end
-                elsif input_2 == "menu"
-                  main_menu
-                  action
-                elsif input_2 == "exit"
-                  goodbye
-                else
-                  puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
-                end
+              elsif input_2 == "menu"
+                main_menu
+                action
+              elsif input_2 == "exit"
+                goodbye
+                break
+              else
+                puts "Not sure what you entered. Please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
               end
+            end
         elsif input_1 == "exit"
           goodbye
         else
