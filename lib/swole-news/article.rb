@@ -1,4 +1,3 @@
-require 'pry'
 class Article
   attr_accessor :title, :url, :workouts, :read_time, :description
   @@all = []
