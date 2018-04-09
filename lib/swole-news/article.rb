@@ -22,8 +22,8 @@ class Article
     # scrape_page = SwoleNews::Scraper.scrape_page
     article_array.map do |article_hash|
       article = self.new(article_hash)
-      article.add_workouts
-      article
+      # article.add_workouts
+      # article
     end
 
   end
