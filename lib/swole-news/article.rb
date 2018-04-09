@@ -12,8 +12,8 @@ class Article
 
   def add_workouts
     @@all.map do |article|
-      scraped_workouts = SwoleNews::Scraper.scrape_workouts(article.url)
-      article.workouts = SwoleNews::Workout.create_from_collection(scraped_workouts)
+      scraped_workouts = Scraper.scrape_workouts(article.url)
+      article.workouts = Workout.create_from_collection(scraped_workouts)
     end
   end
 
