@@ -7,9 +7,13 @@ class SwoleNews::Article
     #takes hash of each article and assigns the respective key and hash to the article
     #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
+    @workouts = create_workouts
+    # @workouts.each{|workout| workout.article = self}
+    workout_array= SwoleNews::Scraper.scrape_workouts(self.url)
+    @workouts = SwoleNews::Workout.create_from_collection(workout_array)
     @@all << self
-    @workouts = SwoleNews::Scraper.scrape_workouts(self.url)
   end
+
 
   def self.create_from_collection(article_array)
     #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
