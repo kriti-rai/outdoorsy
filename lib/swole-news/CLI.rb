@@ -1,4 +1,3 @@
-#CLI Controller
 require 'colorize'
 require 'pry'
 
@@ -29,12 +28,8 @@ class SwoleNews::CLI
   def makes_articles
     scraped_articles = SwoleNews::Scraper.scrape_page
     SwoleNews::Article.create_from_collection(scraped_articles)
-    # SwoleNews::Article.all.each do |article|
-    #   workout_array = SwoleNews::Scraper.scrape_workouts(article.url)
-    #   SwoleNews::Workout.create_from_collection(workout_array)
-    #   article.workouts = SwoleNews::Workout.all
-    # end
     SwoleNews::Article.all
+    binding.pry
   end
 
   def main_menu
@@ -48,11 +43,10 @@ class SwoleNews::CLI
     sleep(1)
     puts "Now listing the workouts...".colorize(:blue)
     sleep(1.5)
-    puts "workout 1"
-    # article.workouts.each.with_index(1) do |workout, i|
-    #   puts "#{i}. #{workout.title}"
-    #   puts "**#{workout.definition}**"
-    # end
+    article.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.title}"
+      puts "**#{workout.definition}**"
+    end
   end
 
   def view_articles(article, input)
