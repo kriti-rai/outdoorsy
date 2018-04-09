@@ -1,5 +1,5 @@
 require 'pry'
-class SwoleNews::Article
+class Article
   attr_accessor :title, :url, :workouts, :read_time, :description
   @@all = []
 
@@ -7,18 +7,26 @@ class SwoleNews::Article
     #takes hash of each article and assigns the respective key and hash to the article
     #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
-    @workouts = create_workouts
-    # @workouts.each{|workout| workout.article = self}
-    workout_array= SwoleNews::Scraper.scrape_workouts(self.url)
-    @workouts = SwoleNews::Workout.create_from_collection(workout_array)
+    @workouts = nil
     @@all << self
   end
 
+  def add_workouts
+    @@all.map do |article|
+      scraped_workouts = SwoleNews::Scraper.scrape_workouts(article.url)
+      article.workouts = SwoleNews::Workout.create_from_collection(scraped_workouts)
+    end
+  end
 
   def self.create_from_collection(article_array)
     #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
     # scrape_page = SwoleNews::Scraper.scrape_page
-    article_array.each {|article_hash| self.new(article_hash)}
+    article_array.map do |article_hash|
+      article = self.new(article_hash)
+      article.add_workouts
+      article
+    end
+
   end
 
   def self.all
