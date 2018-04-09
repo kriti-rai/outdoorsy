@@ -18,16 +18,38 @@ class SwoleNews::Scraper
 
   def self.scrape_workouts(article_url)
   #scrapes the articles to list out an array of workouts which might have hashes of supersets
-      workout_array = []
-        doc = Nokogiri::HTML(open(article_url))
-          doc.search(".cms-article-list__content--container").each do |workout|
-            workout_hash = {
-              :title => workout.search(".cms-article-workout__exercise--title").text,
-              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
-              }
-              workout_array << workout_hash
-            end
-        workout_array
-  end
-
+    workout_array = []
+    
+    article = Nokogiri::HTML(open(article_url))
+    
+    container = article.search(".cms-article-list__content--container")
+    group = container.search(".cms-article-list__content--group")
+    # binding.pry
+    
+      #WITH GROUP WORKOUTS LIKE SUPER/GIANT SETS
+        # group_workouts =[]
+        # group.each do |subgroup| 
+        #     group_hash = {
+        #       :group_title => group.search(".cms-article-list__content--group-title").text,
+        #       :group_description => group.search(".cms-article-list__content--group-description").text,
+        #       :workouts => [{
+        #         :subworkouts => subgroup.search(".cms-article-workout__exercise--title").text,
+        #         :definition =>subgroup.search(".cms-article-workout__sets--definition span").text.strip
+        #         }]
+        #       }
+        #     group_workouts << group_hash
+        #     binding.pry
+        #   end
+      #WITHOUT ANY GROUP WORKOUTS
+      container.each do |workout|
+        workout_hash = {
+          :title => workout.search(".cms-article-workout__exercise--title").text,
+          :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
+         }
+         workout_array << workout_hash
+      end
+     workout_array
+     binding.pry
+   end
+     
 end
