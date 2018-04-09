@@ -49,7 +49,7 @@ class SwoleNews::Scraper
          workout_array << workout_hash
       end
      workout_array
-     binding.pry
+    #  binding.pry
    end
      
 end
