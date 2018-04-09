@@ -1,7 +1,7 @@
 require 'colorize'
 require 'pry'
 
-class SwoleNews::CLI
+class CLI
 
   def call
     puts"            ||                             ||".colorize(:red)
@@ -26,9 +26,9 @@ class SwoleNews::CLI
   end
 
   def makes_articles
-    scraped_articles = SwoleNews::Scraper.scrape_page
-    SwoleNews::Article.create_from_collection(scraped_articles)
-    SwoleNews::Article.all
+    scraped_articles = Scraper.scrape_page
+    Article.create_from_collection(scraped_articles)
+    Article.all
     binding.pry
   end
 
@@ -101,11 +101,11 @@ class SwoleNews::CLI
 
   def action
     input_1 = nil
-      while input_1!= "exit"
+      while input_1 != "exit"
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
         input_1 = gets.strip.downcase
-          if input_1.to_i.between?(1, SwoleNews::Article.all.size)
-            article = SwoleNews::Article.find_by_number(input_1)
+          if input_1.to_i.between?(1, Article.all.size)
+            article = Article.find_by_number(input_1)
             view_articles(article, input_1)
             view_workouts(article)
             break
