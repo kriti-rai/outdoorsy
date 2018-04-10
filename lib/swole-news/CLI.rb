@@ -28,11 +28,12 @@ class CLI
   def makes_articles
     scraped_articles = Scraper.scrape_page
     Article.create_from_collection(scraped_articles)
-    Article.all
+    @articles = Article.all
+    @articles
   end
 
   def main_menu
-    Article.all.each.with_index(1) do |article, i|
+    @articles.each.with_index(1) do |article, i|
       puts "#{i}.".colorize(:blue)+ " #{article.title}".colorize(:red) + " * #{article.read_time} *"
       puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
     end
@@ -106,11 +107,13 @@ class CLI
       while input != "exit"
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
         input = gets.strip.downcase
-          if input.to_i.between?(1, Article.all.size)
-            article = Article.find_by_number(input)
+          if input.to_i.between?(1, @articles.size)
+            article = @articles[input.to_i + 1]
             view_articles(article, input)
             view_workouts(article)
             break
+          else
+            puts "Either the number you entered is out of range or is not recognized by the system."
           end
       end
   end
