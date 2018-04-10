@@ -3,14 +3,11 @@ class Article
   @@all = []
 
   def initialize(article_hash)
-    #takes hash of each article and assigns the respective key and hash to the article
-    #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
     @@all << self
   end
 
   def self.create_from_collection(article_array)
-    #iterate over the array of array of scraped articles to create articles and add workouts
     article_array.map do |article_hash|
       self.new(article_hash)
     end
@@ -24,11 +21,6 @@ class Article
 
   def self.all
     @@all
-  end
-
-  def self.find_by_number(input)
-    input = input.to_i
-    self.all.detect.with_index(1){|article,i| i == input}
   end
 
 end
