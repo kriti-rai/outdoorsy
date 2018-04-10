@@ -108,7 +108,7 @@ class CLI
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
         input = gets.strip.downcase
           if input.to_i.between?(1, @articles.size)
-            article = @articles[input.to_i + 1]
+            article = @articles[input.to_i - 1]
             view_articles(article, input)
             view_workouts(article)
             break
