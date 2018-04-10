@@ -25,6 +25,14 @@ class Scraper
     container = article.search(".cms-article-list__content--container")
     group = container.search(".cms-article-list__content--group")
     # binding.pry
+    container.each do |workout|
+      workout_hash = {
+        :title => workout.search(".cms-article-workout__exercise--title").text,
+        :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
+       }
+       workout_array << workout_hash
+    end
+   workout_array
 
       #WITH GROUP WORKOUTS LIKE SUPER/GIANT SETS
         # group_workouts =[]
@@ -41,14 +49,7 @@ class Scraper
         #     binding.pry
         #   end
       #WITHOUT ANY GROUP WORKOUTS
-      container.each do |workout|
-        workout_hash = {
-          :title => workout.search(".cms-article-workout__exercise--title").text,
-          :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
-         }
-         workout_array << workout_hash
-      end
-     workout_array
+
     #  binding.pry
    end
 
