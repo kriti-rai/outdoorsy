@@ -49,6 +49,7 @@ class Scraper
          workout_array << workout_hash
       end
      workout_array
+    #  binding.pry
    end
 
 end
