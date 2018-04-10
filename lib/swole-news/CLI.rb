@@ -65,48 +65,50 @@ class CLI
   end
 
   def view_workouts(article)
-    input_2 = nil
-      while input_2 != "exit"
+    input = nil
+      while input != "exit"
         puts "Would you like to view the workouts listed inside the article?"
         puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
-        input_2 = gets.strip.downcase
-          if input_2 == "yes"
+        input = gets.strip.downcase
+          if input == "yes"
             list_workouts(article)
             repeat
             break
-          elsif input_2 == "menu"
+          elsif input == "menu"
             main_menu
             action
             break
-          elsif input_2 == "exit"
+          elsif input == "exit"
             break
+          else
+            puts "Not sure what you typed."
           end
       end
   end
 
   def repeat
-    input_3 = nil
-      while input_3 != "exit"
+    input = nil
+      while input != "exit"
         puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
-        input_3 = gets.strip.downcase
-          if input_3 == "menu"
+        input = gets.strip.downcase
+          if input == "menu"
             main_menu
             action
             break
-          elsif input_3 == "exit"
+          elsif input == "exit"
             break
           end
       end
    end
 
   def action
-    input_1 = nil
-      while input_1 != "exit"
+    input = nil
+      while input != "exit"
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
-        input_1 = gets.strip.downcase
-          if input_1.to_i.between?(1, Article.all.size)
-            article = Article.find_by_number(input_1)
-            view_articles(article, input_1)
+        input = gets.strip.downcase
+          if input.to_i.between?(1, Article.all.size)
+            article = Article.find_by_number(input)
+            view_articles(article, input)
             view_workouts(article)
             break
           end
