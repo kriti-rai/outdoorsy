@@ -28,7 +28,7 @@ class Scraper
     container.each do |workout|
       workout_hash = {
         :title => workout.search(".cms-article-workout__exercise--title").text,
-        :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
+        :definition => workout.search(".cms-article-workout__sets--definition span").text.strip || workout.search(".cms-article-workout__exercise--description").text
        }
        workout_array << workout_hash
     end
