@@ -6,28 +6,20 @@ class Article
     #takes hash of each article and assigns the respective key and hash to the article
     #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
-    @workouts = []
     @@all << self
   end
 
-  def add_workout(workout)
-    # @@all.map do |article|
-    #   scraped_workouts = Scraper.scrape_workouts(article.url)
-    #   article.workouts = Workout.create_from_collection(scraped_workouts)
-    # end
-    self.workouts << workout
-    workout.article = self
-  end
-
   def self.create_from_collection(article_array)
-    #iterate over the array of articles provided by SwoleNews::Scraper.scrape_page method to create articles
-    # scrape_page = SwoleNews::Scraper.scrape_page
+    #iterate over the array of array of scraped articles to create articles and add workouts
     article_array.map do |article_hash|
-      article = self.new(article_hash)
-      # article.add_workouts
-      # article
+      self.new(article_hash)
     end
 
+    @@all.map do |article|
+      scraped_workouts = Scraper.scrape_workouts(article.url)
+      article.workouts = Workout.create_from_collection(scraped_workouts)
+      article.workouts.each {|workout| workout.article = article}
+    end
   end
 
   def self.all
@@ -35,8 +27,6 @@ class Article
   end
 
   def self.find_by_number(input)
-    #if input==index+1 return the respective article
-    #else puts an "invalid" message and asks for input again
     input = input.to_i
     self.all.detect.with_index(1){|article,i| i == input}
   end
