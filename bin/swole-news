@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require './lib/swole-news'
-SwoleNews::CLI.new.call
+CLI.new.call
