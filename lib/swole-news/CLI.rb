@@ -41,6 +41,7 @@ class CLI
   def list_workouts(article)
     sleep(1)
     puts "Now listing the workouts...".colorize(:blue)
+    puts "---------------------------".colorize (:yellow)
     sleep(1.5)
     article.workouts.each.with_index(1) do |workout, i|
       puts "#{i}. #{workout.title}".upcase.colorize(:blue)
