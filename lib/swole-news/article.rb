@@ -6,15 +6,17 @@ class Article
     #takes hash of each article and assigns the respective key and hash to the article
     #also saves every new article created to @@all
     article_hash.each {|k,v| self.send("#{k}=", v)}
-    @workouts = nil
+    @workouts = []
     @@all << self
   end
 
-  def add_workouts
-    @@all.map do |article|
-      scraped_workouts = Scraper.scrape_workouts(article.url)
-      article.workouts = Workout.create_from_collection(scraped_workouts)
-    end
+  def add_workout(workout)
+    # @@all.map do |article|
+    #   scraped_workouts = Scraper.scrape_workouts(article.url)
+    #   article.workouts = Workout.create_from_collection(scraped_workouts)
+    # end
+    self.workouts << workout
+    workout.article = self
   end
 
   def self.create_from_collection(article_array)
