@@ -43,8 +43,8 @@ class CLI
     puts "Now listing the workouts...".colorize(:blue)
     sleep(1.5)
     article.workouts.each.with_index(1) do |workout, i|
-      puts "#{i}. #{workout.title}"
-      puts "**#{workout.definition}**"
+      puts "#{i}. #{workout.title}".upcase.colorize(:blue)
+      puts "**#{workout.definition}**".colorize(:yellow)
     end
   end
 
