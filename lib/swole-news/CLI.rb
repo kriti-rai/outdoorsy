@@ -29,11 +29,10 @@ class CLI
     scraped_articles = Scraper.scrape_page
     Article.create_from_collection(scraped_articles)
     Article.all
-    binding.pry
   end
 
   def main_menu
-    makes_articles.each.with_index(1) do |article, i|
+    Article.all.each.with_index(1) do |article, i|
       puts "#{i}.".colorize(:blue)+ " #{article.title}".colorize(:red) + " * #{article.read_time} *"
       puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
     end
