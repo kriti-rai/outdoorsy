@@ -5,7 +5,7 @@ class Workout
 
   def initialize(workout_hash)
     workout_hash.each {|k,v| self.send("#{k}=",v)}
-    # article.add_workout(self)
+    @@all << self
   end
 
   def self.create_from_collection(workout_array)
