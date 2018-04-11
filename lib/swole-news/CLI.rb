@@ -16,23 +16,22 @@ class CLI
     puts "SwoleMate has got your back!".colorize(:green)
     sleep(1.5)
     puts "Here is what's latest in workout.".colorize(:green)
-    makes_articles
-    sleep(1.5)
-    main_menu
+    make_articles
+    list_articles
     sleep(1)
     action
     sleep(1)
     goodbye
   end
 
-  def makes_articles
+  def make_articles
     scraped_articles = Scraper.scrape_page
     Article.create_from_collection(scraped_articles)
     @articles = Article.all
     @articles
   end
 
-  def main_menu
+  def list_articles
     @articles.each.with_index(1) do |article, i|
       puts "#{i}.".colorize(:blue)+ " #{article.title}".colorize(:red) + " * #{article.read_time} *"
       puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
