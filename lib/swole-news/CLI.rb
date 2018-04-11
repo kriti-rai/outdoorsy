@@ -6,16 +6,18 @@ class CLI
   def call
     puts"            ||                             ||".colorize(:red)
     puts"          ||||||                         ||||||".colorize(:red)
-    puts"=========||||||||=======".colorize(:red)+"SWOLENEWS".colorize(:blue)+"=======||||||||=========".colorize(:red)
+    puts"=========||||||||=======".colorize(:red)+"SWOLENEWS".colorize(:color => :black, :background => :light_blue).underline+"=======||||||||=========".colorize(:red)
     puts"          ||||||                         ||||||".colorize(:red)
     puts"            ||                             ||".colorize(:red)
     puts ""
     sleep(1)
-    puts "Tired of your old workout routine? Need some guidance or something new? Look no further".colorize(:green)
+    puts "Tired of your old workout routine? Need some guidance or something new? Look no further!".colorize(:green)
     sleep(1.5)
-    puts "SwoleMate has got your back!".colorize(:green)
+    puts "SwoleNews has got your back!".colorize(:green)
     sleep(1.5)
-    puts "Here is what's latest in workout.".colorize(:green)
+    puts ""
+    puts "Here is what's latest in workout.".colorize(:color => :blue).underline
+    puts ""
     make_articles
     list_articles
     sleep(1)
@@ -34,7 +36,7 @@ class CLI
   def list_articles
     @articles.each.with_index(1) do |article, i|
       puts "#{i}.".colorize(:blue)+ " #{article.title}".colorize(:red) + " * #{article.read_time} *"
-      puts "----------------------------------------------------------------------------------------------------------".colorize(:green)
+      puts "--------------------------------------------------------------------------------------------------------".colorize(:green)
     end
   end
 
