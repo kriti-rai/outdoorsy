@@ -75,7 +75,7 @@ class CLI
             repeat
             break
           elsif input == "menu"
-            main_menu
+            list_articles
             action
             break
           elsif input == "exit"
@@ -92,7 +92,7 @@ class CLI
         puts "Please type 'menu' to go back to the main menu or 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input == "menu"
-            main_menu
+            list_articles
             action
             break
           elsif input == "exit"
