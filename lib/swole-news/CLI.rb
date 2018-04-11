@@ -67,8 +67,8 @@ class CLI
   def view_workouts(article)
     input = nil
       while input != "exit"
-        puts "Would you like to view the workouts listed inside the article?"
-        puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit"
+        puts "Would you like to view the workouts listed inside the article?".colorize(:green)
+        puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit.".colorize(:green)
         input = gets.strip.downcase
           if input == "yes"
             list_workouts(article)
@@ -81,7 +81,7 @@ class CLI
           elsif input == "exit"
             break
           else
-            puts "Not sure what you typed."
+            puts "Not sure what you typed.".colorize(:red)
           end
       end
   end
@@ -89,7 +89,7 @@ class CLI
   def repeat
     input = nil
       while input != "exit"
-        puts "Please type 'menu' to go back to the main menu or 'exit' to exit"
+        puts "Please type 'menu' to go back to the main menu or 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input == "menu"
             main_menu
@@ -104,7 +104,7 @@ class CLI
   def action
     input = nil
       while input != "exit"
-        puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit"
+        puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input.to_i.between?(1, @articles.size)
             article = @articles[input.to_i - 1]
@@ -112,7 +112,7 @@ class CLI
             view_workouts(article)
             break
           else
-            puts "Either the number you entered is out of range or is not recognized by the system."
+            puts "Either the number you entered is out of range or is not recognized by the system.".colorize(:red)
           end
       end
   end
