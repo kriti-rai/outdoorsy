@@ -31,6 +31,7 @@ class CLI
     Article.create_from_collection(scraped_articles)
     @articles = Article.all
     @articles
+    # binding.pry
   end
 
   def list_articles
