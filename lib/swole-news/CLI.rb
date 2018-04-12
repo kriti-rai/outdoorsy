@@ -40,40 +40,40 @@ class CLI
     end
   end
 
-  def list_workouts(article)
+  def list_workouts
     sleep(1)
     puts "Now listing the workouts...".colorize(:blue)
     puts "---------------------------".colorize (:yellow)
     sleep(1.5)
-    article.workouts.each.with_index(1) do |workout, i|
+    @article.workouts.each.with_index(1) do |workout, i|
       puts "#{i}. #{workout.title}".upcase.colorize(:blue)
       puts "**#{workout.definition}**".colorize(:yellow)
     end
   end
 
-  def view_articles(article, input)
+  def view_articles(input)
     puts ""
     sleep(1)
     puts "Viewing article no.#{input}".colorize(:blue)
     puts ""
     puts "== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =="
     sleep(1.5)
-    puts "#{article.title}".colorize(:red) + " * #{article.read_time} *"
-    puts "#{article.description}...".colorize(:yellow)
-    puts "To read more go to:".colorize(:green) + " #{article.url}".colorize(:blue)
+    puts "#{@article.title}".colorize(:red) + " * #{@article.read_time} *"
+    puts "#{@article.description}...".colorize(:yellow)
+    puts "To read more go to:".colorize(:green) + " #{@article.url}".colorize(:blue)
     puts "== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =="
     puts ""
     sleep(1)
   end
 
-  def view_workouts(article)
+  def view_workouts
     input = nil
       while input != "exit"
         puts "Would you like to view the workouts listed inside the article?".colorize(:green)
         puts "If yes, please type 'yes' or 'menu' to go back to the main menu or 'exit' to exit.".colorize(:green)
         input = gets.strip.downcase
           if input == "yes"
-            list_workouts(article)
+            list_workouts
             repeat
             break
           elsif input == "menu"
@@ -109,9 +109,9 @@ class CLI
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input.to_i.between?(1, @articles.size)
-            article = @articles[input.to_i - 1]
-            view_articles(article, input)
-            view_workouts(article)
+            @article = @articles[input.to_i - 1]
+            view_articles(input)
+            view_workouts
             break
           else
             puts "Either the number you entered is out of range or is not recognized by the system.".colorize(:red)
