@@ -1,3 +1,4 @@
+require 'pry'
 class Scraper
 
   def self.scrape_page
@@ -30,25 +31,30 @@ class Scraper
 
     container = article.search(".cms-article-list__content--container")
     group = container.search(".cms-article-list__content--group")
+    # binding.pry
 
       container.each do |content|
         if group
-          group. each do |workout|
-            workout_hash = {
-              :title => workout.search(".cms-article-workout__exercise--title").text,
-              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip,
-              :group_title => workout.search(".cms-article-list__content--group-title").text
-            }
-            workout_array << workout_hash
+          group.each do |item|
+            group_workout_array = []
+            group.search(".cms-article-list__content").each do |workout|
+              group_workout_hash = {
+                :title => workout.search(".cms-article-workout__exercise--title").text,
+                :definition => workout.search(".cms-article-workout__sets--definition span").text.strip,
+                :group_title => item.search(".cms-article-list__content--group-title").text
+              }
+              workout_array << group_workout_hash
+            end
           end
         else
-            workout_hash = {
-              :title => workout.search(".cms-article-workout__exercise--title").text,
-              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
-            }
-            workout_array << workout_hash
+          workout_hash = {
+            :title => content.search(".cms-article-workout__exercise--title").text,
+            :definition => content.search(".cms-article-workout__sets--definition span").text.strip
+          }
+          workout_array << workout_hash
         end
       end
      workout_array
+     binding.pry
   end
 end
