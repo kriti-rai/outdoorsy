@@ -18,39 +18,37 @@ class Scraper
 
   def self.scrape_workouts(article_url)
   #scrapes the articles to list out an array of workouts which might have hashes of supersets
+  #for workouts in groups
+  #iterate through container
+  #look for a group
+  #iterate over the group and find workouts inside
+  #these workouts belong to the group and thus will have an attr of ':group'
+  #overall scrape_workouts will do the group operation, else skip to the regular way
     workout_array = []
 
     article = Nokogiri::HTML(open(article_url))
 
     container = article.search(".cms-article-list__content--container")
     group = container.search(".cms-article-list__content--group")
-    # binding.pry
-    container.each do |workout|
-      workout_hash = {
-        :title => workout.search(".cms-article-workout__exercise--title").text,
-        :definition => workout.search(".cms-article-workout__sets--definition span").text.strip || workout.search(".cms-article-workout__exercise--description").text
-       }
-       workout_array << workout_hash
-    end
-   workout_array
 
-      #WITH GROUP WORKOUTS LIKE SUPER/GIANT SETS
-        # group_workouts =[]
-        # group.each do |subgroup|
-        #     group_hash = {
-        #       :group_title => group.search(".cms-article-list__content--group-title").text,
-        #       :group_description => group.search(".cms-article-list__content--group-description").text,
-        #       :workouts => [{
-        #         :subworkouts => subgroup.search(".cms-article-workout__exercise--title").text,
-        #         :definition =>subgroup.search(".cms-article-workout__sets--definition span").text.strip
-        #         }]
-        #       }
-        #     group_workouts << group_hash
-        #     binding.pry
-        #   end
-      #WITHOUT ANY GROUP WORKOUTS
-
-    #  binding.pry
-   end
-
+      container.each do |content|
+        if group
+          group. each do |workout|
+            workout_hash = {
+              :title => workout.search(".cms-article-workout__exercise--title").text,
+              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip,
+              :group_title => workout.search(".cms-article-list__content--group-title").text
+            }
+            workout_array << workout_hash
+          end
+        else
+            workout_hash = {
+              :title => workout.search(".cms-article-workout__exercise--title").text,
+              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip
+            }
+            workout_array << workout_hash
+        end
+      end
+     workout_array
+  end
 end
