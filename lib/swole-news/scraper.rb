@@ -29,32 +29,32 @@ class Scraper
 
     article = Nokogiri::HTML(open(article_url))
 
-    container = article.search(".cms-article-list__content--container")
-    group = container.search(".cms-article-list__content--group")
+    wrapper = article.search(".cms-article-list__content--wrapper")
     # binding.pry
-
-      container.each do |content|
-        if group
-          group.each do |item|
-            group_workout_array = []
-            group.search(".cms-article-list__content").each do |workout|
-              group_workout_hash = {
-                :title => workout.search(".cms-article-workout__exercise--title").text,
-                :definition => workout.search(".cms-article-workout__sets--definition span").text.strip,
-                :group_title => item.search(".cms-article-list__content--group-title").text
+    wrapper.each do |container|
+      if container.search(".cms-article-list__content--group")
+        container.search(".cms-article-list__content--group").each do |group|
+          group_workout_array = []
+          group.search(".cms-article-list__content").each do |workout|
+            group_workout_hash = {
+              :title => workout.search(".cms-article-workout__exercise--title").text,
+              :definition => workout.search(".cms-article-workout__sets--definition span").text.strip,
+              :group_title => group.search(".cms-article-list__content--group-title").text
               }
-              workout_array << group_workout_hash
-            end
+            group_workout_array << group_workout_hash
           end
-        else
-          workout_hash = {
-            :title => content.search(".cms-article-workout__exercise--title").text,
-            :definition => content.search(".cms-article-workout__sets--definition span").text.strip
-          }
-          workout_array << workout_hash
+          workout_array << group_workout_array
         end
+      else
+        workout_hash = {
+          :title => container.search(".cms-article-workout__exercise--title").text,
+          :definition => container.search(".cms-article-workout__sets--definition span").text.strip
+          }
+        workout_array << workout_hash
+        binding.pry
       end
-     workout_array
-     binding.pry
+    end
+   workout_array
+  #  binding.pry
   end
 end
