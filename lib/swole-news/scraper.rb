@@ -28,10 +28,14 @@ class Scraper
     workout_array = []
 
     article = Nokogiri::HTML(open(article_url))
+    #article_url = "https://www.bodybuilding.com/content/beachside-shoulder-smoker-workout.html"
 
     wrapper = article.search(".cms-article-list__content--wrapper")
+    #selects the element that wraps all the workouts
     # binding.pry
-    wrapper.each do |container|
+    wrapper.search(".cms-article-list__content--container").each do |container|
+      #container returns each item on the list.
+      binding.pry
       if container.search(".cms-article-list__content--group")
         container.search(".cms-article-list__content--group").each do |group|
           group_workout_array = []
@@ -45,13 +49,13 @@ class Scraper
           end
           workout_array << group_workout_array
         end
-      else
+      elsif !container.search(".cms-article-list__content--group")
         workout_hash = {
           :title => container.search(".cms-article-workout__exercise--title").text,
           :definition => container.search(".cms-article-workout__sets--definition span").text.strip
           }
         workout_array << workout_hash
-        binding.pry
+        # binding.pry
       end
     end
    workout_array
