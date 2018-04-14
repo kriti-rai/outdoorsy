@@ -109,6 +109,8 @@ class CLI
             view_articles(input)
             view_workouts
             break
+          elsif input == "exit"
+            break
           else
             puts "Either the number you entered is out of range or is not recognized by the system.".colorize(:red)
           end
