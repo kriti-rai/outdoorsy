@@ -1,5 +1,5 @@
 class Workout
-  attr_accessor :title, :definition, :article, :group_title
+  attr_accessor :title, :definition, :article
 
   @@all =[]
 
