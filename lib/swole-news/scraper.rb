@@ -6,13 +6,13 @@ class Scraper
     doc = Nokogiri::HTML(open('https://www.bodybuilding.com/category/workouts'))
 
     doc.css(".cms-article-list--article.col.col-1").map do |article|
-      article = {
+      article_hash = {
         :title => article.search("h3.title").text,
         :url => article.search("a").attribute('href').to_s,
         :read_time => article.search(".bb-read-time__time").text,
         :description => article.search("span.description").text
         }
-        article_array << article
+        article_array << article_hash
       end
     article_array
   end
