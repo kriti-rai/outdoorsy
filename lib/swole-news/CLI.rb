@@ -36,17 +36,6 @@ class CLI
     end
   end
 
-  def list_workouts
-    sleep(1)
-    puts "Now listing the workouts...".colorize(:blue)
-    puts "---------------------------".colorize (:yellow)
-    sleep(1.5)
-    @article.workouts.each.with_index(1) do |workout, i|
-      puts "#{i}. #{workout.title}".upcase.colorize(:blue)
-      puts "**#{workout.definition}**".colorize(:yellow)
-    end
-  end
-
   def view_articles(input)
     puts ""
     sleep(1)
@@ -60,6 +49,17 @@ class CLI
     puts "== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =="
     puts ""
     sleep(1)
+  end
+
+  def list_workouts
+    sleep(1)
+    puts "Now listing the workouts...".colorize(:blue)
+    puts "---------------------------".colorize (:yellow)
+    sleep(1.5)
+    @article.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.title}".upcase.colorize(:blue)
+      puts "**#{workout.definition}**".colorize(:yellow)
+    end
   end
 
   def view_workouts
