@@ -1,6 +1,3 @@
-require 'colorize'
-require 'pry'
-
 class CLI
 
   def call
@@ -108,7 +105,6 @@ class CLI
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input =~ /^-?[0-9]+$/ && input.to_i.between?(1, @articles.size)
-            # binding.pry
             @article = @articles[input.to_i - 1]
             view_articles(input)
             view_workouts
