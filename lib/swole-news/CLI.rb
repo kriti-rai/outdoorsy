@@ -102,7 +102,7 @@ class CLI
   def action
     input = nil
       while input != "exit"
-        puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
+        puts "Please enter a number from the list to view the article or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
           if input =~ /^-?[0-9]+$/ && input.to_i.between?(1, @articles.size)
             @article = @articles[input.to_i - 1]
