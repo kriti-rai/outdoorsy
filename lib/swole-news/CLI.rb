@@ -107,7 +107,8 @@ class CLI
       while input != "exit"
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
-          if input.to_i.between?(1, @articles.size)
+          if input =~ /^-?[0-9]+$/ && input.to_i.between?(1, @articles.size)
+            # binding.pry
             @article = @articles[input.to_i - 1]
             view_articles(input)
             view_workouts
