@@ -2,7 +2,9 @@ class Scraper
 
   def self.scrape_page
     article_array = []
+
     doc = Nokogiri::HTML(open('https://www.bodybuilding.com/category/workouts'))
+
     doc.css(".cms-article-list--article.col.col-1").map do |article|
       article = {
         :title => article.search("h3.title").text,
