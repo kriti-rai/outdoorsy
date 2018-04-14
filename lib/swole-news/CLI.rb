@@ -10,7 +10,6 @@ class CLI
     puts"          ||||||                         ||||||".colorize(:red)
     puts"            ||                             ||".colorize(:red)
     puts ""
-    sleep(1)
     puts "Tired of your old workout routine? Need some guidance or something new? Look no further!".colorize(:green)
     sleep(1.5)
     puts "SwoleNews has got your back!".colorize(:green)
@@ -31,7 +30,6 @@ class CLI
     Article.create_from_collection(scraped_articles)
     @articles = Article.all
     @articles
-    # binding.pry
   end
 
   def list_articles
@@ -121,7 +119,6 @@ class CLI
   end
 
   def goodbye
-    sleep(1)
     puts "Keep up the good work and stay swole! See you soon!".colorize(:yellow)
   end
 
