@@ -1,6 +1,3 @@
-require 'colorize'
-require 'pry'
-
 class CLI
 
   def call
@@ -10,7 +7,6 @@ class CLI
     puts"          ||||||                         ||||||".colorize(:red)
     puts"            ||                             ||".colorize(:red)
     puts ""
-    sleep(1)
     puts "Tired of your old workout routine? Need some guidance or something new? Look no further!".colorize(:green)
     sleep(1.5)
     puts "SwoleNews has got your back!".colorize(:green)
@@ -40,17 +36,6 @@ class CLI
     end
   end
 
-  def list_workouts
-    sleep(1)
-    puts "Now listing the workouts...".colorize(:blue)
-    puts "---------------------------".colorize (:yellow)
-    sleep(1.5)
-    @article.workouts.each.with_index(1) do |workout, i|
-      puts "#{i}. #{workout.title}".upcase.colorize(:blue)
-      puts "**#{workout.definition}**".colorize(:yellow)
-    end
-  end
-
   def view_articles(input)
     puts ""
     sleep(1)
@@ -64,6 +49,17 @@ class CLI
     puts "== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =="
     puts ""
     sleep(1)
+  end
+
+  def list_workouts
+    sleep(1)
+    puts "Now listing the workouts...".colorize(:blue)
+    puts "---------------------------".colorize (:yellow)
+    sleep(1.5)
+    @article.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.title}".upcase.colorize(:blue)
+      puts "**#{workout.definition}**".colorize(:yellow)
+    end
   end
 
   def view_workouts
@@ -108,7 +104,7 @@ class CLI
       while input != "exit"
         puts "Please enter a number from the list to view the workouts listed inside or enter 'exit' to exit".colorize(:green)
         input = gets.strip.downcase
-          if input.to_i.between?(1, @articles.size)
+          if input =~ /^-?[0-9]+$/ && input.to_i.between?(1, @articles.size)
             @article = @articles[input.to_i - 1]
             view_articles(input)
             view_workouts
@@ -120,7 +116,6 @@ class CLI
   end
 
   def goodbye
-    sleep(1)
     puts "Keep up the good work and stay swole! See you soon!".colorize(:yellow)
   end
 

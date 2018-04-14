@@ -1,5 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
+require 'colorize'
+
 
 require_relative "./swole-news/version"
 require_relative "./swole-news/CLI"

@@ -1,5 +1,6 @@
 class Article
   attr_accessor :title, :url, :workouts, :read_time, :description
+
   @@all = []
 
   def initialize(article_hash)
@@ -9,6 +10,7 @@ class Article
 
   def self.create_from_collection(article_array)
     article_array.map{|article_hash|self.new(article_hash)}
+
     @@all.map do |article|
       scraped_workouts = Scraper.scrape_workouts(article.url)
       article.workouts = Workout.create_from_collection(scraped_workouts)
