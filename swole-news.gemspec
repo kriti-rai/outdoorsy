@@ -12,7 +12,6 @@ Gem::Specification.new do |spec|
   spec.summary       = "Pulls up the latest articles in workouts"
   spec.homepage      = "https://github.com/kriti-rai/swole-news"
   spec.license       = "MIT"
-  end
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
